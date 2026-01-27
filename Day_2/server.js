@@ -7,7 +7,7 @@ app.get('/', (req, res)=>{
 })
 
 app.get('/about', (req, res)=>{
-    res.send('I am from shimla')
+    res.send('I am from shimla') 
 })
 
 app.listen(3000) //server start
