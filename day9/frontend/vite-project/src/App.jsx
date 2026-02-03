@@ -30,7 +30,7 @@ function App() {
     let b = Math.floor(Math.random()*256)
     const {title, description} = e.target.elements
 
-    axios.post("http://localhost:3000/api/notes",{
+    axios.post("https://day9-backend.onrender.com/api/notes",{
       title: title.value,
       description: description.value,
       color:{
