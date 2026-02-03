@@ -6,11 +6,12 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
+app.use(express.static('public'))
 
 app.post('/api/notes', async(req, res)=>{
-    const{title, description} = req.body
+    const{title, description, color} = req.body
     const note = await noteModel.create({
-        title, description
+        title, description, color
     })
 
     res.status(201).json({
@@ -40,12 +41,17 @@ app.delete('/api/note/:id', async(req, res)=>{
 
 app.patch('/api/note/:id', async(req, res)=>{
     const id = req.params.id
-    const {description} = req.body
-    await noteModel.findByIdAndUpdate(id, {description})
+    const {title, description} = req.body
+    await noteModel.findByIdAndUpdate(id, {title, description})
+    
 
     res.status(201).json({
         message:"updated"
-    })
+    }) 
+})
+
+app.get('*name', (req, res)=>{
+    res.sendFile(path.join(__dirname,"..","/public/index.html"))
 })
 
 module.exports = app
