@@ -12,7 +12,7 @@ function App() {
   })
 
   function fetchNotes(){
-    axios.get('http://localhost:3000/api/notes')
+    axios.get('https://day9-backend.onrender.com/api/notes')
     .then((res)=>{
       setNotes(res.data.notes)
     })
@@ -45,7 +45,7 @@ function App() {
   }
   
   function handelDeleteNote(noteId){
-    axios.delete("http://localhost:3000/api/note/"+noteId)
+    axios.delete("https://day9-backend.onrender.com/api/note/"+noteId)
     .then(()=>{
       fetchNotes()
     })
@@ -57,7 +57,7 @@ function App() {
     
     const {title,description} = e.target.elements
 
-    axios.patch('http://localhost:3000/api/note/'+id,{
+    axios.patch('https://day9-backend.onrender.com/api/note/'+id,{
       title:title.value,
       description:description.value,
     })
