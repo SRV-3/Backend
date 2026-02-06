@@ -1,0 +1,38 @@
+const express = require('express')
+const jwt = require('jsonwebtoken')
+const authRouter = express.Router()
+const userModel = require('../models/users.model')
+
+authRouter.post('/register', async(req, res)=>{
+    const {name,email,password} = req.body
+
+    const isUserAlreadyExist = await userModel.findOne({email})
+
+    if(isUserAlreadyExist){
+        return res.status(400).json({
+            message:"USER WITH THIS MAIL ALREADY EXIST"
+        })
+    }
+
+    const user = await userModel.create({
+        name,email,password
+    })
+
+    const token = jwt.sign(
+        {
+            id: user._id,
+            email: user.email
+        },
+        process.env.JWT_SECRET
+    )
+
+    res.cookie("jwt_token", token)
+
+    res.status(201).json({
+        message:"USER CREATED",
+        user,
+        token
+    })
+})
+
+module.exports = authRouter
