@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs')
 
 async function registerController  (req, res){
     const{username, email, password, bio, profileImage} = req.body
-    console.log(username)
+    
 
     // const isUserExistByEmail = await userModel.findOne({email})
     // const isUserExistByUsername = await userModel.findOne({username})
@@ -97,7 +97,7 @@ async function loginController (req, res){
     }
 
     const token = jwt.sign(
-        {id:user._id},
+        {id:user._id, username: user.username},
         process.env.JWT_SECRET,
         {expiresIn:"1d"}
     )
