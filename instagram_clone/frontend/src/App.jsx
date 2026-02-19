@@ -1,12 +1,11 @@
-import { RouterProvider } from "react-router"
-import AppRoutes from "./routes"
-
+import AppRoutes from "./AppRoute"
+import './style.scss'
 
 function App() {
 
   return (
     <>
-      
+      <AppRoutes/>
     </>
   )
 }
