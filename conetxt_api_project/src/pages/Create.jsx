@@ -12,7 +12,10 @@ function Create() {
 
     const submitHandler = (recipe) => {
         recipe.id = nanoid()
-        setData([...data, recipe])
+        const copyData = [...data]
+        copyData.push(recipe)
+        setData(copyData)
+        localStorage.setItem("recipes", JSON.stringify(copyData))
         toast.success("New Recipe Created")
         reset()
         navigate('/recipes')

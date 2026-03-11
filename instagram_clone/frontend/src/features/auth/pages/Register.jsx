@@ -1,25 +1,22 @@
 import React, { useState } from 'react'
-import {Link} from 'react-router'
-import axios from 'axios'
+import {Link, useNavigate} from 'react-router'
+import { useAuth } from '../hooks/useAuth'
 
 
 function Register() {
+    const { loading, handelRegister} = useAuth()
 
     const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    
+    const navigate = useNavigate()
 
     async function handelSubmit(e){
         e.preventDefault()
-
-        axios.post("http://localhost:3000/api/auth/register",{
-            username,email,password,
-        },{
-            withCredentials: true
-        })
-        .then(res => {
-            console.log(res.data)
-        })
+        await handelRegister(username,email,password)
+        
+        navigate('/')
     }
 
   return (

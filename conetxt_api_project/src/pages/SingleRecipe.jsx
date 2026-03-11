@@ -25,6 +25,7 @@ function SingleRecipe() {
         const copyData = [...data]
         copyData[index] = {...copyData, ...recipe}
         setData(copyData)
+        localStorage.setItem("recipes", JSON.stringify(copyData))
         toast.success("Recipe Updated")
     
     }
@@ -32,6 +33,7 @@ function SingleRecipe() {
     const deleteHandler = ()=>{
         const filterData = data.filter((r)=> r.id != params.id)
         setData(filterData)
+        localStorage.setItem("recipes", JSON.stringify(filterData))
         toast.success("Recipe Deleted")
         navigate("/recipes")
     }
